@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<addon addon_id="ThemeHouse_Conversations" title="[⌂] Conversations" version_string="1.0.0" version_id="1447261019" url="http://xf.themehouse.io/" install_callback_class="ThemeHouse_Install" install_callback_method="install" uninstall_callback_class="ThemeHouse_Install" uninstall_callback_method="uninstall">
+  <admin_navigation/>
+  <admin_permissions/>
+  <admin_style_properties/>
+  <admin_templates/>
+  <admin_template_modifications/>
+  <code_events/>
+  <code_event_listeners>
+    <listener event_id="controller_pre_dispatch" execute_order="10" callback_class="ThemeHouse_Listener_ControllerPreDispatch" callback_method="controllerPreDispatch" active="1" hint="" description=""/>
+    <listener event_id="file_health_check" execute_order="10" callback_class="ThemeHouse_Conversations_Listener_FileHealthCheck" callback_method="fileHealthCheck" active="1" hint="" description=""/>
+    <listener event_id="init_dependencies" execute_order="10" callback_class="ThemeHouse_Listener_InitDependencies" callback_method="initDependencies" active="1" hint="" description=""/>
+    <listener event_id="load_class" execute_order="10" callback_class="ThemeHouse_Conversations_Listener_LoadClass" callback_method="loadClassDataWriter" active="0" hint="XenForo_DataWriter_ConversationMaster" description="XenForo_DataWriter_ConversationMaster (For XenForo 1.2 and above)" compatibility_switch="1"/>
+    <listener event_id="load_class" execute_order="10" callback_class="ThemeHouse_Conversations_Listener_LoadClass" callback_method="loadClassDataWriter" active="0" hint="XenForo_DataWriter_ConversationMessage" description="XenForo_DataWriter_ConversationMessage (For XenForo 1.2 and above)" compatibility_switch="1"/>
+    <listener event_id="load_class" execute_order="10" callback_class="ThemeHouse_Conversations_Listener_LoadClass" callback_method="loadClassModel" active="0" hint="XenForo_Model_Conversation" description="XenForo_Model_Conversation (For XenForo 1.2 and above)" compatibility_switch="1"/>
+    <listener event_id="load_class" execute_order="10" callback_class="ThemeHouse_Conversations_Listener_LoadClass" callback_method="loadClassController" active="0" hint="XenForo_ControllerPublic_Conversation" description="XenForo_ControllerPublic_Conversation (For XenForo 1.2 and above)" compatibility_switch="1"/>
+    <listener event_id="load_class_controller" execute_order="10" callback_class="ThemeHouse_Conversations_Listener_LoadClass" callback_method="loadClassController" active="1" hint="" description="(For XenForo 1.1 and below)" compatibility_switch="1"/>
+    <listener event_id="load_class_datawriter" execute_order="10" callback_class="ThemeHouse_Conversations_Listener_LoadClass" callback_method="loadClassDataWriter" active="1" hint="" description="(For XenForo 1.1 and below)" compatibility_switch="1"/>
+    <listener event_id="load_class_model" execute_order="10" callback_class="ThemeHouse_Conversations_Listener_LoadClass" callback_method="loadClassModel" active="1" hint="" description="(For XenForo 1.1 and below)" compatibility_switch="1"/>
+  </code_event_listeners>
+  <cron/>
+  <email_templates/>
+  <email_template_modifications/>
+  <optiongroups/>
+  <permissions>
+    <permission_groups/>
+    <permissions/>
+    <interface_groups/>
+  </permissions>
+  <phrases>
+    <phrase title="th_conversations_marked_as_read_conversations" version_id="1409916811" version_string="1.0.0"><![CDATA[Conversations marked as read]]></phrase>
+    <phrase title="th_mark_conversations_read_conversations" version_id="1409916811" version_string="1.0.0"><![CDATA[Mark Conversations Read]]></phrase>
+  </phrases>
+  <route_prefixes/>
+  <style_properties/>
+  <templates/>
+  <public_template_modifications>
+    <modification template="footer" modification_key="th_copyrightNotice_conversations" description="Copyright notice for [⌂] Conversations" execution_order="1" enabled="1" action="callback">
+      <find><![CDATA[/{xen:phrase (?:xenforo|extra)_copyright}/]]></find>
+      <replace><![CDATA[ThemeHouse_Listener_InitDependencies::copyrightNotice]]></replace>
+    </modification>
+    <modification template="navigation_visitor_tab" modification_key="th_navigationVisitorTab_conversations" description="Adds 'Mark Conversations Read' link to tabs." execution_order="10" enabled="1" action="preg_replace">
+      <find><![CDATA[#(<xen:if is="{\$tabs.inbox.selected}">\s*<li class="navTab selected">\s*<div class="tabLinks">\s*<ul class="secondaryContent blockLinksList">.*)(</ul>\s*</div>\s*</li>\s*</xen:if>)#Us]]></find>
+      <replace><![CDATA[${1}
+<li><a href="{xen:link conversations/mark-read}">{xen:phrase th_mark_conversations_read_conversations}</a></li>
+${2}]]></replace>
+    </modification>
+    <modification template="navigation" modification_key="th_navigation_conversations" description="Adds 'Mark Conversations Read' link to tabs." execution_order="10" enabled="1" action="preg_replace">
+      <find><![CDATA[#(<xen:if is="{\$tabs.inbox.selected}">\s*<li class="navTab selected">\s*<div class="tabLinks">\s*<ul class="secondaryContent blockLinksList">.*)(</ul>\s*</div>\s*</li>\s*</xen:if>)#Us]]></find>
+      <replace><![CDATA[${1}
+<li><a href="{xen:link conversations/mark-read}">{xen:phrase th_mark_conversations_read_conversations}</a></li>
+${2}]]></replace>
+    </modification>
+    <modification template="uix_visitorTabs" modification_key="th_uixVisitorTabs_conversations" description="Adds 'Mark Conversations Read' link to tabs." execution_order="10" enabled="1" action="preg_replace">
+      <find><![CDATA[#(<xen:if is="{\$tabs.inbox.selected}">\s*<li class="navTab selected">\s*<div class="tabLinks">\s*<ul class="secondaryContent blockLinksList">.*)(</ul>\s*</div>\s*</li>\s*</xen:if>)#Us]]></find>
+      <replace><![CDATA[${1}
+<li><a href="{xen:link conversations/mark-read}">{xen:phrase th_mark_conversations_read_conversations}</a></li>
+${2}]]></replace>
+    </modification>
+  </public_template_modifications>
+  <bb_code_media_sites/>
+  <bb_codes/>
+</addon>
